@@ -1290,37 +1290,37 @@ function Card({ children, className = "" }) {
   );
 }
 
-function FAQItem({ item, i }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <motion.div 
-      className="rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden"
-      whileHover={{ y: -2 }}
-    >
-      <button
-        onClick={() => setOpen((v) => !v)}
-        className="w-full flex items-center justify-between gap-4 p-5 text-left interactive"
-      >
-        <span className="font-medium">{i + 1}. {item.q}</span>
-        <motion.div animate={{ rotate: open ? 180 : 0 }}>
-          <ChevronDown className="size-5 transition-transform" />
-        </motion.div>
-      </button>
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="px-5 pb-5 text-sm opacity-90"
-          >
-            {item.a}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-}
+// function FAQItem({ item, i }) {
+//   const [open, setOpen] = useState(false);
+//   return (
+//     <motion.div 
+//       className="rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden"
+//       whileHover={{ y: -2 }}
+//     >
+//       <button
+//         onClick={() => setOpen((v) => !v)}
+//         className="w-full flex items-center justify-between gap-4 p-5 text-left interactive"
+//       >
+//         <span className="font-medium">{i + 1}. {item.q}</span>
+//         <motion.div animate={{ rotate: open ? 180 : 0 }}>
+//           <ChevronDown className="size-5 transition-transform" />
+//         </motion.div>
+//       </button>
+//       <AnimatePresence initial={false}>
+//         {open && (
+//           <motion.div
+//             initial={{ height: 0, opacity: 0 }}
+//             animate={{ height: "auto", opacity: 1 }}
+//             exit={{ height: 0, opacity: 0 }}
+//             className="px-5 pb-5 text-sm opacity-90"
+//           >
+//             {item.a}
+//           </motion.div>
+//         )}
+//       </AnimatePresence>
+//     </motion.div>
+//   );
+// }
 
 function useParallax(ref) {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
@@ -1886,6 +1886,60 @@ function LogoCarousel({ direction = "right", speed = 40 }) {
 }
 
 // Portfolio Modal Component
+// function PortfolioModal({ isOpen, onClose }) {
+//   if (!isOpen) return null;
+
+//   return (
+//     <motion.div
+//       initial={{ opacity: 0 }}
+//       animate={{ opacity: 1 }}
+//       exit={{ opacity: 0 }}
+//       className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md"
+//       onClick={onClose}
+//     >
+//       <motion.div
+//         initial={{ scale: 0.9, opacity: 0 }}
+//         animate={{ scale: 1, opacity: 1 }}
+//         exit={{ scale: 0.9, opacity: 0 }}
+//         transition={{ type: "spring", damping: 25 }}
+//         className="relative mx-4 w-full max-w-6xl rounded-3xl border border-white/10 bg-gradient-to-b from-[#1A1A2E] to-[#0A0A14] p-6"
+//         onClick={(e) => e.stopPropagation()}
+//       >
+//         <button
+//           onClick={onClose}
+//           className="absolute right-6 top-6 rounded-full bg-white/10 p-2 transition-all hover:bg-white/20"
+//         >
+//           <X className="size-5" />
+//         </button>
+        
+//         <h2 className="mb-8 text-center text-3xl font-bold">Logo Portfolio</h2>
+        
+//         <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
+//           {logos.map((logo) => (
+//             <motion.div
+//               key={logo.id}
+//               className="group relative flex h-60 items-center justify-center rounded-2xl bg-white/5 p-6 backdrop-blur-md transition-all duration-300 hover:bg-white/10 interactive"
+//               whileHover={{ y: -5 }}
+//             >
+//               <img
+//                 src={logo.image}
+//                 alt={logo.name}
+//                 className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
+//               />
+//               <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-black/80 opacity-0 transition-all duration-300 group-hover:opacity-100">
+//                 <div className="p-4 text-center">
+//                   <h3 className="font-semibold">{logo.name}</h3>
+//                   <p className="mt-2 text-sm text-white/80">{logo.description}</p>
+//                 </div>
+//               </div>
+//             </motion.div>
+//           ))}
+//         </div>
+//       </motion.div>
+//     </motion.div>
+//   );
+// }
+
 function PortfolioModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
@@ -1894,7 +1948,7 @@ function PortfolioModal({ isOpen, onClose }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
       onClick={onClose}
     >
       <motion.div
@@ -1902,38 +1956,40 @@ function PortfolioModal({ isOpen, onClose }) {
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
         transition={{ type: "spring", damping: 25 }}
-        className="relative mx-4 w-full max-w-6xl rounded-3xl border border-white/10 bg-gradient-to-b from-[#1A1A2E] to-[#0A0A14] p-6"
+        className="relative w-full max-w-6xl h-full max-h-[90vh] rounded-3xl border border-white/10 bg-gradient-to-b from-[#1A1A2E] to-[#0A0A14] p-6 flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className="absolute right-6 top-6 rounded-full bg-white/10 p-2 transition-all hover:bg-white/20"
+          className="absolute right-6 top-6 z-10 rounded-full bg-white/10 p-2 transition-all hover:bg-white/20"
         >
           <X className="size-5" />
         </button>
         
-        <h2 className="mb-8 text-center text-3xl font-bold">Logo Portfolio</h2>
+        <h2 className="text-3xl font-bold text-center mb-6">Logo Portfolio</h2>
         
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
-          {logos.map((logo) => (
-            <motion.div
-              key={logo.id}
-              className="group relative flex h-60 items-center justify-center rounded-2xl bg-white/5 p-6 backdrop-blur-md transition-all duration-300 hover:bg-white/10 interactive"
-              whileHover={{ y: -5 }}
-            >
-              <img
-                src={logo.image}
-                alt={logo.name}
-                className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-black/80 opacity-0 transition-all duration-300 group-hover:opacity-100">
-                <div className="p-4 text-center">
-                  <h3 className="font-semibold">{logo.name}</h3>
-                  <p className="mt-2 text-sm text-white/80">{logo.description}</p>
+        <div className="flex-1 overflow-y-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-4">
+            {logos.map((logo) => (
+              <motion.div
+                key={logo.id}
+                className="group relative flex h-60 items-center justify-center rounded-2xl bg-white/5 p-6 backdrop-blur-md transition-all duration-300 hover:bg-white/10 interactive"
+                whileHover={{ y: -5 }}
+              >
+                <img
+                  src={logo.image}
+                  alt={logo.name}
+                  className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-black/80 opacity-0 transition-all duration-300 group-hover:opacity-100">
+                  <div className="p-4 text-center">
+                    <h3 className="font-semibold">{logo.name}</h3>
+                    <p className="mt-2 text-sm text-white/80">{logo.description}</p>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
       </motion.div>
     </motion.div>
@@ -2053,7 +2109,107 @@ function Testimonials() {
   );
 }
 
+// function FAQ() {
+//   return (
+//     <Section id="faq">
+//       <div className="mx-auto max-w-3xl text-center">
+//         <motion.h2 
+//           className="text-3xl md:text-5xl font-extrabold tracking-tight"
+//           initial={{ opacity: 0, y: 20 }}
+//           whileInView={{ opacity: 1, y: 0 }}
+//           viewport={{ once: true }}
+//           transition={{ duration: 0.6 }}
+//         >
+//           Frequently Asked Questions
+//         </motion.h2>
+//       </div>
+//       <motion.div 
+//         className="mt-10 grid gap-4 md:grid-cols-2"
+//         initial={{ opacity: 0 }}
+//         whileInView={{ opacity: 1 }}
+//         viewport={{ once: true }}
+//         transition={{ delay: 0.2, duration: 0.6 }}
+//       >
+//         {faqs.map((item, i) => (
+//           <FAQItem key={i} item={item} i={i} />
+//         ))}
+//       </motion.div>
+//     </Section>
+//   );
+// }
+
+function FAQItem({ item, i }) {
+  const [open, setOpen] = useState(false);
+  const contentRef = useRef(null);
+  const [contentHeight, setContentHeight] = useState(0);
+
+  // Calculate content height only once after component mounts
+  useEffect(() => {
+    if (contentRef.current) {
+      setContentHeight(contentRef.current.scrollHeight);
+    }
+  }, []);
+
+  return (
+    <motion.div 
+      className="rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.4 }}
+      whileHover={{ y: -3 }}
+    >
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between gap-4 p-5 text-left interactive"
+      >
+        <span className="font-medium text-left">{item.q}</span>
+        <motion.div 
+          animate={{ rotate: open ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <ChevronDown className="size-5 flex-shrink-0" />
+        </motion.div>
+      </button>
+      <motion.div
+        initial={false}
+        animate={{ 
+          height: open ? contentHeight : 0,
+          opacity: open ? 1 : 0.8
+        }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="overflow-hidden"
+      >
+        <div ref={contentRef} className="px-5 pb-5 text-sm opacity-90">
+          {item.a}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 function FAQ() {
+  const containerRef = useRef(null);
+  const [inView, setInView] = useState(false);
+  
+  // Simple intersection observer to trigger animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+    
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <Section id="faq">
       <div className="mx-auto max-w-3xl text-center">
@@ -2067,17 +2223,18 @@ function FAQ() {
           Frequently Asked Questions
         </motion.h2>
       </div>
-      <motion.div 
-        className="mt-10 grid gap-4 md:grid-cols-2"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.2, duration: 0.6 }}
-      >
+      
+      <div ref={containerRef} className="mt-10 grid gap-4 md:grid-cols-2">
         {faqs.map((item, i) => (
-          <FAQItem key={i} item={item} i={i} />
+          <FAQItem 
+            key={i} 
+            item={item} 
+            i={i} 
+            // Only animate if section is in view
+            shouldAnimate={inView}
+          />
         ))}
-      </motion.div>
+      </div>
     </Section>
   );
 }
