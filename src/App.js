@@ -1551,7 +1551,7 @@ function Header() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden mx-4 rounded-2xl border border-white/10 bg-black/60 backdrop-blur-md"
+            className="md:hidden mx-6 mt-2 rounded-2xl border border-white/10 bg-black/60 backdrop-blur-md"
           >
             <div className="flex flex-col px-4 py-3 text-sm">
               {nav.map((n) => (
