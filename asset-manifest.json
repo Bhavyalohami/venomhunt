@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/venomhunt/static/css/main.678caf28.css",
-    "main.js": "/venomhunt/static/js/main.e9d31e5c.js",
+    "main.css": "/venomhunt/static/css/main.247bace4.css",
+    "main.js": "/venomhunt/static/js/main.2daccad2.js",
     "index.html": "/venomhunt/index.html",
-    "main.678caf28.css.map": "/venomhunt/static/css/main.678caf28.css.map",
-    "main.e9d31e5c.js.map": "/venomhunt/static/js/main.e9d31e5c.js.map"
+    "main.247bace4.css.map": "/venomhunt/static/css/main.247bace4.css.map",
+    "main.2daccad2.js.map": "/venomhunt/static/js/main.2daccad2.js.map"
   },
   "entrypoints": [
-    "static/css/main.678caf28.css",
-    "static/js/main.e9d31e5c.js"
+    "static/css/main.247bace4.css",
+    "static/js/main.2daccad2.js"
   ]
 }
