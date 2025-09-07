@@ -1,8 +1,9 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { Menu, X, Palette, PenTool, Monitor, Sparkles, Mail, Phone, ArrowRight, ChevronDown, Twitter, Linkedin, Instagram } from "lucide-react";
+import { Menu, X, Palette, PenTool, Monitor, Sparkles, Mail, Phone, ArrowRight, ChevronDown, Instagram, Youtube } from "lucide-react";
 import emailjs from 'emailjs-com';
 import { SiFiverr } from "react-icons/si";
+import { FaPinterest } from "react-icons/fa";
 
 // Particle background component
 const ParticlesBackground = () => {
@@ -773,18 +774,18 @@ function About() {
             </p>
             <div className="mt-6 flex flex-col gap-4">
               <motion.a 
-                href="mailto:hello@logocraft.com" 
+                href="mailto:venomhunt123@gmail.com" 
                 className="inline-flex items-center gap-2 interactive"
                 whileHover={{ x: 5 }}
               >
-                <Mail className="size-4" /> hello@logocraft.com
+                <Mail className="size-4" /> venomhunt123@gmail.com
               </motion.a>
               <motion.a 
-                href="tel:+15551234567" 
+                href="tel:+919950531145" 
                 className="inline-flex items-center gap-2 interactive"
                 whileHover={{ x: 5 }}
               >
-                <Phone className="size-4" /> +1 (555) 123‑4567
+                <Phone className="size-4" /> +91 9950531145
               </motion.a>
             </div>
           </Card>
@@ -1602,18 +1603,18 @@ function Contact() {
         <div className="inline-flex items-center gap-4">
           <motion.a 
             className="inline-flex items-center gap-2 interactive" 
-            href="mailto:hello@logocraft.com"
+            href="mailto:venomhunt123@gmail.com"
             whileHover={{ y: -2 }}
           >
-            <Mail className="size-4"/> hello@logocraft.com
+            <Mail className="size-4"/> venomhunt123@gmail.com
           </motion.a>
           <span className="opacity-40">•</span>
           <motion.a 
             className="inline-flex items-center gap-2 interactive" 
-            href="tel:+15551234567"
+            href="tel:+919950531145"
             whileHover={{ y: -2 }}
           >
-            <Phone className="size-4"/> +1 (555) 123‑4567
+            <Phone className="size-4"/> +91 9950531145
           </motion.a>
         </div>
       </motion.div>
@@ -1643,28 +1644,31 @@ function Footer() {
             {/* <span>Venom<span className="text-pink-400">Hunt</span></span> */}
             <img src={`${process.env.PUBLIC_URL}/vh-02.png`} alt="Logo" className="h-8 w-32"/>  
           </motion.a>
-        <div className="text-white/70">© {new Date().getFullYear()} LogoCraft. All rights reserved.</div>
+        <div className="text-white/70">© {new Date().getFullYear()} VenomHunt. All rights reserved.</div>
         <div className="flex items-center gap-5 text-sm">
           <motion.a 
-            href="#" 
+            href="https://www.youtube.com/@VenomSayss"
+            target="_blank" 
             className="text-white/70 hover:text-white interactive"
             whileHover={{ y: -2 }}
           >
-            <Twitter className="size-5" />
+            <Youtube className="size-6" />
           </motion.a>
           <motion.a 
-            href="#" 
+            href="https://www.instagram.com/venomhunt_fiverr/"
+            target="_blank" 
             className="text-white/70 hover:text-white interactive"
             whileHover={{ y: -2 }}
           >
             <Instagram className="size-5" />
           </motion.a>
           <motion.a 
-            href="#" 
+            href="https://in.pinterest.com/venom_hunt/"
+            target="_blank" 
             className="text-white/70 hover:text-white interactive"
             whileHover={{ y: -2 }}
           >
-            <Linkedin className="size-5" />
+            <FaPinterest className="size-5" />
           </motion.a>
           {/* <motion.a 
             href="#" 
@@ -1700,7 +1704,7 @@ const FloatingButton = () => {
     <motion.a
       href="https://www.fiverr.com/venom_hunt"
       target="_blank"
-      className="fixed bottom-12 right-12 z-50 p-2 flex flex-col items-center justify-center rounded-full bg-gradient-to-br from-[#00b22d] to-[#a8e49b] text-white shadow-md interactive"
+      className="fixed bottom-4 md:bottom-12 right-4 md:right-12 z-50 p-2 flex flex-col items-center justify-center rounded-full bg-gradient-to-br from-[#00b22d] to-[#a8e49b] text-white shadow-md interactive"
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       initial={{ opacity: 0 }}  
