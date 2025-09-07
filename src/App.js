@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, AnimatePresence, useAnimation } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Menu, X, Palette, PenTool, Monitor, Sparkles, Mail, Phone, ArrowRight, ChevronDown, Twitter, Linkedin, Instagram } from "lucide-react";
 import emailjs from 'emailjs-com';
 import { SiFiverr } from "react-icons/si";
@@ -213,16 +213,16 @@ const logos = [
   { id: 9, name: "Pivot Consulting", image: `${process.env.PUBLIC_URL}/Logos/Character_Mascot/tmiman_l01a_10.png`, description: "Business strategy consultants" },
   { id: 10, name: "Terra Firma", image: `${process.env.PUBLIC_URL}/Logos/Character_Mascot/zoeskitchen22_l01_3.png`, description: "Outdoor adventure company" },
 
-  { id: 11, name: "Nexus Labs", image: `${process.env.PUBLIC_URL}/Logos/Character_Mascot/iblackish_l01a_4.png`, description: "Innovative tech research lab" },
-  { id: 12, name: "Bliss Yoga", image: `${process.env.PUBLIC_URL}/Logos/Character_Mascot/iblackish_l01a_4.png`, description: "Wellness and yoga studio" },
-  { id: 13, name: "Crimson Publishing", image: `${process.env.PUBLIC_URL}/Logos/Character_Mascot/iblackish_l01a_4.png`, description: "Independent book publisher" },
-  { id: 14, name: "Momentum Motors", image: `${process.env.PUBLIC_URL}/Logos/Character_Mascot/iblackish_l01a_4.png`, description: "Electric vehicle manufacturer" },
-  { id: 15, name: "Aura Beauty", image: `${process.env.PUBLIC_URL}/Logos/Character_Mascot/iblackish_l01a_4.png`, description: "Organic skincare brand" },
-  { id: 16, name: "Verde Restaurant", image: `${process.env.PUBLIC_URL}/Logos/Character_Mascot/iblackish_l01a_4.png`, description: "Plant-based fine dining" },
-  { id: 17, name: "Summit Ventures", image: `${process.env.PUBLIC_URL}/Logos/Character_Mascot/iblackish_l01a_4.png`, description: "Venture capital firm" },
-  { id: 18, name: "Flow State", image: `${process.env.PUBLIC_URL}/Logos/Character_Mascot/iblackish_l01a_4.png`, description: "Productivity app for creators" },
-  { id: 19, name: "Nimbus Weather", image: `${process.env.PUBLIC_URL}/Logos/Character_Mascot/iblackish_l01a_4.png`, description: "Weather forecasting service" },
-  { id: 20, name: "Echo Records", image: `${process.env.PUBLIC_URL}/Logos/Character_Mascot/iblackish_l01a_4.png`, description: "Independent music label" },
+  { id: 11, name: "Nexus Labs", image: `${process.env.PUBLIC_URL}/Logos/Water_Color/Blended Branches Blooms and Bakery - final copy.png`, description: "Innovative tech research lab" },
+  { id: 12, name: "Bliss Yoga", image: `${process.env.PUBLIC_URL}/Logos/Water_Color/Camp Real XP.png`, description: "Wellness and yoga studio" },
+  { id: 13, name: "Crimson Publishing", image: `${process.env.PUBLIC_URL}/Logos/Water_Color/Ghost Magician-01.png`, description: "Independent book publisher" },
+  { id: 14, name: "Momentum Motors", image: `${process.env.PUBLIC_URL}/Logos/Water_Color/Heritage Juice - file .png`, description: "Electric vehicle manufacturer" },
+  { id: 15, name: "Aura Beauty", image: `${process.env.PUBLIC_URL}/Logos/Water_Color/Life-Offroading.png`, description: "Organic skincare brand" },
+  { id: 16, name: "Verde Restaurant", image: `${process.env.PUBLIC_URL}/Logos/Water_Color/Old Press Co..png`, description: "Plant-based fine dining" },
+  { id: 17, name: "Summit Ventures", image: `${process.env.PUBLIC_URL}/Logos/Water_Color/Twin Cities-01.png`, description: "Venture capital firm" },
+  { id: 18, name: "Flow State", image: `${process.env.PUBLIC_URL}/Logos/Water_Color/The Boston Bike Company.png`, description: "Productivity app for creators" },
+  { id: 19, name: "Nimbus Weather", image: `${process.env.PUBLIC_URL}/Logos/Water_Color/The Wellness Stream Foundation 2.png`, description: "Weather forecasting service" },
+  { id: 20, name: "Echo Records", image: `${process.env.PUBLIC_URL}/Logos/Water_Color/Kamies Kloset - final copy.png`, description: "Independent music label" },
 
   { id: 21, name: "Nexus Labs", image: `${process.env.PUBLIC_URL}/Logos/Modern_Minimalist/astronova.png`, description: "Innovative tech research lab" },
   { id: 22, name: "Bliss Yoga", image: `${process.env.PUBLIC_URL}/Logos/Modern_Minimalist/bdragoncontent_3 variations_26022025_JERRY_KZ00A_R04B(SH).png`, description: "Wellness and yoga studio" },
@@ -769,6 +769,7 @@ function About() {
             <h3 className="text-xl font-semibold">My Approach</h3>
             <p className="mt-3 text-white/70">
               {/* I follow a strategic process that begins with understanding your business, audience, and goals. Through research, sketching, and refinement, I create logos that are not just visually appealing but also meaningful and effective. */}
+            Venom Hunt is your one-stop creative hub with 3 powerhouse services: bold logo & brand identity design, eye-catching illustrations & mascots, and high-impact marketing visuals from flyers to packaging. Everything you need to make your brand unforgettable, all under one roof.
             </p>
             <div className="mt-6 flex flex-col gap-4">
               <motion.a 
