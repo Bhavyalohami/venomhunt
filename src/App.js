@@ -1,6 +1,6 @@
-import React, { useMemo, useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, AnimatePresence, useAnimation } from "framer-motion";
-import { Menu, X, Palette, PenTool, Monitor, Sparkles, Mail, Phone, ArrowRight, ChevronDown, ExternalLink, Github, Twitter, Linkedin, Instagram, Zap, Award, Users, Clock } from "lucide-react";
+import { Menu, X, Palette, PenTool, Monitor, Sparkles, Mail, Phone, ArrowRight, ChevronDown, Twitter, Linkedin, Instagram } from "lucide-react";
 import emailjs from 'emailjs-com';
 import { SiFiverr } from "react-icons/si";
 
@@ -305,12 +305,12 @@ const posts = [
 
 function Header() {
   const [open, setOpen] = useState(false);
-  const { scrollY } = useScroll();
-  const backgroundColor = useTransform(
-    scrollY,
-    [0, 100],
-    ["rgba(0,0,0,0)", "rgba(15,15,25,0.9)"]
-  );
+  // const { scrollY } = useScroll();
+  // const backgroundColor = useTransform(
+  //   scrollY,
+  //   [0, 100],
+  //   ["rgba(0,0,0,0)", "rgba(15,15,25,0.9)"]
+  // );
   
   return (
     <motion.header 
@@ -518,7 +518,7 @@ function Header() {
 function Hero() {
   const ref = useRef(null);
   const { y, scale } = useParallax(ref);
-  const controls = useAnimation();
+  // const controls = useAnimation();
   const [currentText, setCurrentText] = useState(0);
   
   const texts = [
@@ -1197,67 +1197,67 @@ function FAQ() {
   );
 }
 
-function Insights() {
-  return (
-    <Section id="insights">
-      <div className="mx-auto max-w-3xl text-center">
-        <motion.h2 
-          className="text-3xl md:text-5xl font-extrabold tracking-tight"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          Design Insights
-        </motion.h2>
-        <motion.p 
-          className="mt-3 text-white/70"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-        >
-          Thoughts on logo design, branding, and visual identity.
-        </motion.p>
-      </div>
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
-        {posts.map((p) => (
-          <motion.div
-            key={p.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <Card className="h-full">
-              <div className="h-40 overflow-hidden rounded-xl mb-4">
-                <motion.img 
-                  src={p.image} 
-                  alt={p.title}
-                  className="w-full h-full object-cover"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.4 }}
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <div className="text-xs uppercase tracking-wider text-white/60">{p.date}</div>
-                <h3 className="text-lg font-semibold">{p.title}</h3>
-                <p className="text-white/70 text-sm">{p.summary}</p>
-                <motion.a 
-                  href="#" 
-                  className="mt-2 inline-flex items-center gap-1 text-sm text-white/80 hover:text-white interactive"
-                  whileHover={{ x: 5 }}
-                >
-                  Read more <ArrowRight className="size-4" />
-                </motion.a>
-              </div>
-            </Card>
-          </motion.div>
-        ))}
-      </div>
-    </Section>
-  );
-}
+// function Insights() {
+//   return (
+//     <Section id="insights">
+//       <div className="mx-auto max-w-3xl text-center">
+//         <motion.h2 
+//           className="text-3xl md:text-5xl font-extrabold tracking-tight"
+//           initial={{ opacity: 0, y: 20 }}
+//           whileInView={{ opacity: 1, y: 0 }}
+//           viewport={{ once: true }}
+//           transition={{ duration: 0.6 }}
+//         >
+//           Design Insights
+//         </motion.h2>
+//         <motion.p 
+//           className="mt-3 text-white/70"
+//           initial={{ opacity: 0 }}
+//           whileInView={{ opacity: 1 }}
+//           viewport={{ once: true }}
+//           transition={{ delay: 0.2, duration: 0.6 }}
+//         >
+//           Thoughts on logo design, branding, and visual identity.
+//         </motion.p>
+//       </div>
+//       <div className="mt-10 grid gap-6 md:grid-cols-2">
+//         {posts.map((p) => (
+//           <motion.div
+//             key={p.title}
+//             initial={{ opacity: 0, y: 20 }}
+//             whileInView={{ opacity: 1, y: 0 }}
+//             viewport={{ once: true }}
+//             transition={{ duration: 0.6 }}
+//           >
+//             <Card className="h-full">
+//               <div className="h-40 overflow-hidden rounded-xl mb-4">
+//                 <motion.img 
+//                   src={p.image} 
+//                   alt={p.title}
+//                   className="w-full h-full object-cover"
+//                   whileHover={{ scale: 1.05 }}
+//                   transition={{ duration: 0.4 }}
+//                 />
+//               </div>
+//               <div className="flex flex-col gap-2">
+//                 <div className="text-xs uppercase tracking-wider text-white/60">{p.date}</div>
+//                 <h3 className="text-lg font-semibold">{p.title}</h3>
+//                 <p className="text-white/70 text-sm">{p.summary}</p>
+//                 <motion.a 
+//                   href="#" 
+//                   className="mt-2 inline-flex items-center gap-1 text-sm text-white/80 hover:text-white interactive"
+//                   whileHover={{ x: 5 }}
+//                 >
+//                   Read more <ArrowRight className="size-4" />
+//                 </motion.a>
+//               </div>
+//             </Card>
+//           </motion.div>
+//         ))}
+//       </div>
+//     </Section>
+//   );
+// }
 
 // function Contact() {
 //   const [formData, setFormData] = useState({
