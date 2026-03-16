@@ -1,5 +1,7 @@
 import { getPreparedSeoRoutes } from "../src/seo/routes";
 
+export const dynamic = "force-static";
+
 export default function sitemap() {
   return getPreparedSeoRoutes()
     .filter((route) => route.includeInSitemap && route.indexable)

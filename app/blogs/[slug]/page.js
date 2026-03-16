@@ -7,7 +7,6 @@ import { toNextMetadata } from "../../../src/seo/nextMetadata";
 import { getBlogPostSeo } from "../../../src/seo/routes";
 
 export const dynamicParams = false;
-export const revalidate = 86400;
 
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));

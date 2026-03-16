@@ -6,7 +6,6 @@ import { getBlogsSeo } from "../../src/seo/routes";
 const seo = getBlogsSeo("/blogs");
 
 export const metadata = toNextMetadata(seo);
-export const revalidate = 86400;
 
 export default function Page() {
   return (
