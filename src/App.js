@@ -1,9 +1,14 @@
+"use client";
+
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Menu, X, Palette, PenTool, Monitor, Sparkles, Mail, Phone, ArrowRight, ChevronDown, Instagram, Youtube } from "lucide-react";
 import emailjs from 'emailjs-com';
 import { SiFiverr } from "react-icons/si";
 import { FaPinterest } from "react-icons/fa";
+import SeoHead from "./components/SeoHead";
+import { blogPosts, buildBlogContentBlocks, formatBlogDate, getReadTimeLabel } from "./lib/blogs";
+import { getBlogPostSeo, getBlogsSeo, getHomeSeo } from "./seo/routes";
 
 // Particle background component
 const ParticlesBackground = () => {
@@ -100,7 +105,7 @@ function Section({ id, className = "", children }) {
   return (
     <motion.section 
       id={id} 
-      className={`relative py-20 md:py-28 ${className}`}
+      className={`relative scroll-mt-28 py-20 md:py-28 ${className}`}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
@@ -145,13 +150,13 @@ function Stat({ value, label }) {
   );
 }
 
-const nav = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "Contact", href: "#contact" },
+const homeSectionNav = [
+  { label: "Home", sectionId: "home" },
+  { label: "About", sectionId: "about" },
+  { label: "Services", sectionId: "services" },
+  { label: "Portfolio", sectionId: "portfolio" },
+  { label: "Testimonials", sectionId: "testimonials" },
+  { label: "Contact", sectionId: "contact" },
 ];
 
 const services = [
@@ -201,40 +206,45 @@ const services = [
   },
 ];
 
+const heroTexts = [
+  "Logo Designer",
+  "Brand Identity Specialist",
+  "Visual Storyteller",
+  "Creative Director"
+];
+
 // Sample logo data - replace with your actual logos
 const logos = [
-  { id: 1, name: "Industry", image: `${process.env.PUBLIC_URL}/Logos/Character_Mascot/mscoleedrakes_l01_4a.png`, description: "Sports" },
-  { id: 2, name: "Product", image: `${process.env.PUBLIC_URL}/Logos/Character_Mascot/bepoliteinc_l01_2.png`, description: "Real-Estate Blog" },
-  { id: 3, name: "Service", image: `${process.env.PUBLIC_URL}/Logos/Character_Mascot/cafeonwheels_l01_5.png`, description: "House Cleaning" },
-  { id: 4, name: "Industry", image: `${process.env.PUBLIC_URL}/Logos/Character_Mascot/cherylepriester_l01_3.png`, description: "Restaurant" },
-  { id: 5, name: "Business", image: `${process.env.PUBLIC_URL}/Logos/Character_Mascot/iblackish_l01a_4.png`, description: "Live Streaming" },
-  { id: 6, name: "Product", image: `${process.env.PUBLIC_URL}/Logos/Character_Mascot/robertkashkashi_l01_4.png`, description: "Vocal Blog" },
-  { id: 7, name: "Illustration", image: `${process.env.PUBLIC_URL}/Logos/Character_Mascot/sethjones229_l01a_13.png`, description: "Self Portrait" },
-  { id: 8, name: "Harbor Coffee", image: `${process.env.PUBLIC_URL}/Logos/Character_Mascot/steveelp_l01 _2a.png`, description: "Specialty coffee roasters" },
-  { id: 9, name: "Pivot Consulting", image: `${process.env.PUBLIC_URL}/Logos/Character_Mascot/tmiman_l01a_10.png`, description: "Business strategy consultants" },
-  { id: 10, name: "Terra Firma", image: `${process.env.PUBLIC_URL}/Logos/Character_Mascot/zoeskitchen22_l01_3.png`, description: "Outdoor adventure company" },
-
-  { id: 11, name: "Nexus Labs", image: `${process.env.PUBLIC_URL}/Logos/Water_Color/Blended Branches Blooms and Bakery - final copy.png`, description: "Innovative tech research lab" },
-  { id: 12, name: "Bliss Yoga", image: `${process.env.PUBLIC_URL}/Logos/Water_Color/Camp Real XP.png`, description: "Wellness and yoga studio" },
-  { id: 13, name: "Crimson Publishing", image: `${process.env.PUBLIC_URL}/Logos/Water_Color/Ghost Magician-01.png`, description: "Independent book publisher" },
-  { id: 14, name: "Momentum Motors", image: `${process.env.PUBLIC_URL}/Logos/Water_Color/Heritage Juice - file .png`, description: "Electric vehicle manufacturer" },
-  { id: 15, name: "Aura Beauty", image: `${process.env.PUBLIC_URL}/Logos/Water_Color/Life-Offroading.png`, description: "Organic skincare brand" },
-  { id: 16, name: "Verde Restaurant", image: `${process.env.PUBLIC_URL}/Logos/Water_Color/Old Press Co..png`, description: "Plant-based fine dining" },
-  { id: 17, name: "Summit Ventures", image: `${process.env.PUBLIC_URL}/Logos/Water_Color/Twin Cities-01.png`, description: "Venture capital firm" },
-  { id: 18, name: "Flow State", image: `${process.env.PUBLIC_URL}/Logos/Water_Color/The Boston Bike Company.png`, description: "Productivity app for creators" },
-  { id: 19, name: "Nimbus Weather", image: `${process.env.PUBLIC_URL}/Logos/Water_Color/The Wellness Stream Foundation 2.png`, description: "Weather forecasting service" },
-  { id: 20, name: "Echo Records", image: `${process.env.PUBLIC_URL}/Logos/Water_Color/Kamies Kloset - final copy.png`, description: "Independent music label" },
-
-  { id: 21, name: "Nexus Labs", image: `${process.env.PUBLIC_URL}/Logos/Modern_Minimalist/astronova.png`, description: "Innovative tech research lab" },
-  { id: 22, name: "Bliss Yoga", image: `${process.env.PUBLIC_URL}/Logos/Modern_Minimalist/bdragoncontent_3 variations_26022025_JERRY_KZ00A_R04B(SH).png`, description: "Wellness and yoga studio" },
-  { id: 23, name: "Crimson Publishing", image: `${process.env.PUBLIC_URL}/Logos/Modern_Minimalist/CreativeFlow-01.png`, description: "Independent book publisher" },
-  { id: 24, name: "Momentum Motors", image: `${process.env.PUBLIC_URL}/Logos/Modern_Minimalist/Digital-leapfrog-final-logo.png`, description: "Electric vehicle manufacturer" },
-  { id: 25, name: "Aura Beauty", image: `${process.env.PUBLIC_URL}/Logos/Modern_Minimalist/dinazu88_vm_14aA00a.png`, description: "Organic skincare brand" },
-  { id: 26, name: "Verde Restaurant", image: `${process.env.PUBLIC_URL}/Logos/Modern_Minimalist/Nail Theory - logo 1-01 (1).png`, description: "Plant-based fine dining" },
-  { id: 27, name: "Summit Ventures", image: `${process.env.PUBLIC_URL}/Logos/Modern_Minimalist/santhini026_13062025_Jerry_KZ00A_R02A(s) (1).png`, description: "Venture capital firm" },
-  { id: 28, name: "Flow State", image: `${process.env.PUBLIC_URL}/Logos/Modern_Minimalist/Weston Woodman-02.png`, description: "Productivity app for creators" },
-  { id: 29, name: "Nimbus Weather", image: `${process.env.PUBLIC_URL}/Logos/Modern_Minimalist/yogric_modern logo_14062025_Jerry_KZ00A_R04A(SY).png`, description: "Weather forecasting service" },
-  { id: 30, name: "Echo Records", image: `${process.env.PUBLIC_URL}/Logos/Modern_Minimalist/yvonnekeyes_0401_00aA2a.png`, description: "Independent music label" },
+  { id: 1, name: "Industry", image: rootAsset("Logos/Character_Mascot/mscoleedrakes_l01_4a.png"), description: "Sports" },
+  { id: 2, name: "Product", image: rootAsset("Logos/Character_Mascot/bepoliteinc_l01_2.png"), description: "Real-Estate Blog" },
+  { id: 3, name: "Service", image: rootAsset("Logos/Character_Mascot/cafeonwheels_l01_5.png"), description: "House Cleaning" },
+  { id: 4, name: "Industry", image: rootAsset("Logos/Character_Mascot/cherylepriester_l01_3.png"), description: "Restaurant" },
+  { id: 5, name: "Business", image: rootAsset("Logos/Character_Mascot/iblackish_l01a_4.png"), description: "Live Streaming" },
+  { id: 6, name: "Product", image: rootAsset("Logos/Character_Mascot/robertkashkashi_l01_4.png"), description: "Vocal Blog" },
+  { id: 7, name: "Illustration", image: rootAsset("Logos/Character_Mascot/sethjones229_l01a_13.png"), description: "Self Portrait" },
+  { id: 8, name: "Harbor Coffee", image: rootAsset("Logos/Character_Mascot/steveelp_l01 _2a.png"), description: "Specialty coffee roasters" },
+  { id: 9, name: "Pivot Consulting", image: rootAsset("Logos/Character_Mascot/tmiman_l01a_10.png"), description: "Business strategy consultants" },
+  { id: 10, name: "Terra Firma", image: rootAsset("Logos/Character_Mascot/zoeskitchen22_l01_3.png"), description: "Outdoor adventure company" },
+  { id: 11, name: "Nexus Labs", image: rootAsset("Logos/Water_Color/Blended Branches Blooms and Bakery - final copy.png"), description: "Innovative tech research lab" },
+  { id: 12, name: "Bliss Yoga", image: rootAsset("Logos/Water_Color/Camp Real XP.png"), description: "Wellness and yoga studio" },
+  { id: 13, name: "Crimson Publishing", image: rootAsset("Logos/Water_Color/Ghost Magician-01.png"), description: "Independent book publisher" },
+  { id: 14, name: "Momentum Motors", image: rootAsset("Logos/Water_Color/Heritage Juice - file .png"), description: "Electric vehicle manufacturer" },
+  { id: 15, name: "Aura Beauty", image: rootAsset("Logos/Water_Color/Life-Offroading.png"), description: "Organic skincare brand" },
+  { id: 16, name: "Verde Restaurant", image: rootAsset("Logos/Water_Color/Old Press Co..png"), description: "Plant-based fine dining" },
+  { id: 17, name: "Summit Ventures", image: rootAsset("Logos/Water_Color/Twin Cities-01.png"), description: "Venture capital firm" },
+  { id: 18, name: "Flow State", image: rootAsset("Logos/Water_Color/The Boston Bike Company.png"), description: "Productivity app for creators" },
+  { id: 19, name: "Nimbus Weather", image: rootAsset("Logos/Water_Color/The Wellness Stream Foundation 2.png"), description: "Weather forecasting service" },
+  { id: 20, name: "Echo Records", image: rootAsset("Logos/Water_Color/Kamies Kloset - final copy.png"), description: "Independent music label" },
+  { id: 21, name: "Nexus Labs", image: rootAsset("Logos/Modern_Minimalist/astronova.png"), description: "Innovative tech research lab" },
+  { id: 22, name: "Bliss Yoga", image: rootAsset("Logos/Modern_Minimalist/bdragoncontent_3 variations_26022025_JERRY_KZ00A_R04B(SH).png"), description: "Wellness and yoga studio" },
+  { id: 23, name: "Crimson Publishing", image: rootAsset("Logos/Modern_Minimalist/CreativeFlow-01.png"), description: "Independent book publisher" },
+  { id: 24, name: "Momentum Motors", image: rootAsset("Logos/Modern_Minimalist/Digital-leapfrog-final-logo.png"), description: "Electric vehicle manufacturer" },
+  { id: 25, name: "Aura Beauty", image: rootAsset("Logos/Modern_Minimalist/dinazu88_vm_14aA00a.png"), description: "Organic skincare brand" },
+  { id: 26, name: "Verde Restaurant", image: rootAsset("Logos/Modern_Minimalist/Nail Theory - logo 1-01 (1).png"), description: "Plant-based fine dining" },
+  { id: 27, name: "Summit Ventures", image: rootAsset("Logos/Modern_Minimalist/santhini026_13062025_Jerry_KZ00A_R02A(s) (1).png"), description: "Venture capital firm" },
+  { id: 28, name: "Flow State", image: rootAsset("Logos/Modern_Minimalist/Weston Woodman-02.png"), description: "Productivity app for creators" },
+  { id: 29, name: "Nimbus Weather", image: rootAsset("Logos/Modern_Minimalist/yogric_modern logo_14062025_Jerry_KZ00A_R04A(SY).png"), description: "Weather forecasting service" },
+  { id: 30, name: "Echo Records", image: rootAsset("Logos/Modern_Minimalist/yvonnekeyes_0401_00aA2a.png"), description: "Independent music label" },
 ];
 
 const testimonials = [
@@ -242,25 +252,25 @@ const testimonials = [
     name: "gauravobhan",
     role: "Canada",
     quote: "It was a pleasure to have him in my team to design the art for my video game loading screen. The artist is very cooperative and always open to feedback and delivering as per them. Will definitely consider him for any future projects.",
-    avatar: `${process.env.PUBLIC_URL}/Testimonials/GAURAV.jpg`,
+    avatar: rootAsset("Testimonials/GAURAV.jpg"),
   },
   {
     name: "Daniel",
     role: "UAE",
     quote: "He delivered super fast, nailed the vision on the first try, and made the whole process effortless. No revisions needed — the final result was perfection. Creative, professional, and efficient — a rare combo! 🌟 So happy I got to work with him — highly recommend! 🙌🔥",
-    avatar: `${process.env.PUBLIC_URL}/Testimonials/daniel.webp`,
+    avatar: rootAsset("Testimonials/daniel.webp"),
   },
   {
     name: "mbarkersimpson",
     role: "US",
     quote: "Venom took my ideas and created something that fit perfectly. He's quick, works hard to tailor a project, and is responsive. This is the second project I've worked on with him, and I am delighted with the result.",
-    avatar: `${process.env.PUBLIC_URL}/Testimonials/mbarker.jpg`,
+    avatar: rootAsset("Testimonials/mbarker.jpg"),
   },
   {
     name: "oceannafb",
     role: "UK",
     quote: "Venom is an exceptionally brilliant creator. His professionalism shines through in every piece of work he delivers. He’s incredibly cooperative and easy to work with—just tell him what you need, and he’ll exceed your expectations every time.",
-    avatar: `${process.env.PUBLIC_URL}/Testimonials/OCEANNA.webp`,
+    avatar: rootAsset("Testimonials/OCEANNA.webp"),
   },
 ];
 
@@ -287,54 +297,46 @@ const faqs = [
   // },
 ];
 
-const posts = [
-  {
-    title: "Logo Design Trends 2025",
-    date: "Apr 30, 2025",
-    summary: "Exploring the latest trends in typography, color, and symbolism.",
-    image: "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=400&auto=format&fit=crop",
-  },
-  {
-    title: "The Psychology of Color in Logos",
-    date: "Apr 27, 2025",
-    summary: "How color choices influence brand perception and recognition.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=400&auto=format&fit=crop",
-  },
-];
+function normalizePathname(pathname = "/") {
+  const cleanPath = pathname.replace(/\/+$/, "");
+  return cleanPath || "/";
+}
+
+function getSectionHref(sectionId, isHomePage) {
+  return isHomePage ? `#${sectionId}` : `/#${sectionId}`;
+}
+
+function rootAsset(path) {
+  return path.startsWith("/") ? path : `/${path}`;
+}
 
 // ... (useParallax, Stat, Section, Card, FAQItem components remain the same) ...
 
-function Header() {
+export function Header({ isHomePage }) {
   const [open, setOpen] = useState(false);
-  // const { scrollY } = useScroll();
-  // const backgroundColor = useTransform(
-  //   scrollY,
-  //   [0, 100],
-  //   ["rgba(0,0,0,0)", "rgba(15,15,25,0.9)"]
-  // );
+  const navItems = [
+    ...homeSectionNav.map((item) => ({
+      label: item.label,
+      href: getSectionHref(item.sectionId, isHomePage),
+    })),
+    { label: "Blogs", href: "/blogs" },
+  ];
   
   return (
     <motion.header 
       className="fixed inset-x-0 top-0 z-40"
-      // style={{ backgroundColor }}
     >
       <div className="mx-auto max-w-6xl px-6">
         <div className="mt-4 flex items-center justify-between rounded-2xl border border-white/10 bg-black/30 px-4 py-3 backdrop-blur-md">
           <motion.a 
-            href="#home" 
+            href={isHomePage ? "#home" : "/"} 
             className="flex items-center gap-2 font-semibold tracking-tight interactive"
             whileHover={{ scale: 1.05 }}
           >
-            {/* <motion.span 
-              className="inline-block h-7 w-7 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            /> */}
-            {/* <span>Venom<span className="text-pink-400">Hunt</span></span> */}
-            <img src={`${process.env.PUBLIC_URL}/vh-02.png`} alt="Logo" className="h-8 w-32"/>  
+            <img src={rootAsset("vh-02.png")} alt="Logo" className="h-8 w-32"/>  
           </motion.a>
           <nav className="hidden md:flex items-center gap-6 text-sm">
-            {nav.map((n) => (
+            {navItems.map((n) => (
               <motion.a 
                 key={n.href} 
                 href={n.href} 
@@ -345,7 +347,7 @@ function Header() {
               </motion.a>
             ))}
             <motion.a
-              href="#contact"
+              href={getSectionHref("contact", isHomePage)}
               className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-sm hover:bg-white/[0.12] interactive"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -372,7 +374,7 @@ function Header() {
             className="md:hidden mx-6 mt-2 rounded-2xl border border-white/10 bg-black/60 backdrop-blur-md"
           >
             <div className="flex flex-col px-4 py-3 text-sm">
-              {nav.map((n) => (
+              {navItems.map((n) => (
                 <motion.a 
                   key={n.href} 
                   href={n.href} 
@@ -522,16 +524,9 @@ function Hero() {
   // const controls = useAnimation();
   const [currentText, setCurrentText] = useState(0);
   
-  const texts = [
-    "Logo Designer",
-    "Brand Identity Specialist",
-    "Visual Storyteller",
-    "Creative Director"
-  ];
-  
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentText((prev) => (prev + 1) % texts.length);
+      setCurrentText((prev) => (prev + 1) % heroTexts.length);
     }, 3000);
     
     return () => clearInterval(interval);
@@ -560,7 +555,7 @@ function Hero() {
                   transition={{ duration: 0.6 }}
                   style={{ lineHeight: '1.2' }}
                 >
-                  {texts[currentText]}
+                  {heroTexts[currentText]}
                 </motion.span>
               </AnimatePresence>
             </div>
@@ -605,7 +600,7 @@ function Hero() {
             whileHover={{ rotate: 2 }}
           >
             <img
-              src={`${process.env.PUBLIC_URL}/Hero/image-1.jpg`}
+              src={rootAsset("Hero/image-1.jpg")}
               alt="logo design process"
               className="h-full w-full object-cover"
             />
@@ -616,7 +611,7 @@ function Hero() {
             whileHover={{ rotate: -2 }}
           >
             <img
-              src={`${process.env.PUBLIC_URL}/Hero/image-2.jpg`}
+              src={rootAsset("Hero/image-2.jpg")}
               alt="brand identity"
               className="h-full w-full object-cover"
             />
@@ -1402,8 +1397,264 @@ function FAQ() {
 //     </Section>
 //   );
 // }
+function BlogCard({ post, compact = false }) {
+  if (compact) {
+    return (
+      <motion.a
+        href={`/blogs/${post.slug}`}
+        className="group interactive flex h-full flex-col gap-2 rounded-lg p-2 transition-colors duration-150 hover:bg-white/5 active:bg-white/10"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.45 }}
+      >
+        <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
+          <img
+            src={post.image}
+            alt={post.title}
+            className="aspect-[16/9] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+        </div>
+        <div className="space-y-2 px-2 pb-2">
+          <p className="text-[11px] uppercase tracking-[0.18em] text-pink-300/70 sm:text-xs">
+            {post.category}
+          </p>
+          <div className="flex flex-wrap items-center gap-2 text-[11px] text-white/45 sm:text-xs">
+            <p>by {post.author}</p>
+            <div className="size-1 rounded-full bg-white/35" />
+            <p>{formatBlogDate(post.createdAt)}</p>
+            <div className="size-1 rounded-full bg-white/35" />
+            <p>{getReadTimeLabel(post)}</p>
+          </div>
+          <h3 className="line-clamp-2 text-lg font-semibold leading-5 tracking-tight text-white">
+            {post.title}
+          </h3>
+          <p className="line-clamp-3 text-sm leading-6 text-white/65">{post.description}</p>
+        </div>
+      </motion.a>
+    );
+  }
 
+  return (
+    <motion.a
+      href={`/blogs/${post.slug}`}
+      className="interactive block h-full"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ y: -4 }}
+    >
+      <Card className="h-full overflow-hidden p-0">
+        <div className="h-56 overflow-hidden">
+          <img
+            src={post.image}
+            alt={post.title}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
+        <div className="flex h-full flex-col p-6">
+          <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.18em] text-white/50">
+            <span>{post.category}</span>
+            <span>{formatBlogDate(post.createdAt)}</span>
+            <span>{getReadTimeLabel(post)}</span>
+          </div>
+          <h3 className="mt-4 text-xl font-semibold leading-snug text-white">{post.title}</h3>
+          <p className="mt-3 text-sm leading-7 text-white/70">{post.description}</p>
+          <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-pink-300">
+            Read article <ArrowRight className="size-4" />
+          </span>
+        </div>
+      </Card>
+    </motion.a>
+  );
+}
 
+function BlogPreviewSection() {
+  return (
+    <Section id="blogs">
+      <div className="mx-auto w-full max-w-6xl">
+        <div className="space-y-2 px-4 py-2 text-center">
+          <motion.h2
+            className="text-3xl md:text-5xl font-extrabold tracking-tight"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            Branding Insights
+          </motion.h2>
+          <motion.p
+            className="mx-auto mt-3 max-w-3xl text-white/70"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+          >
+            Insights on branding, logo design, and creative direction for businesses building a
+            sharper visual identity.
+          </motion.p>
+        </div>
+
+        <div className="mt-8 grid gap-2 px-2 md:grid-cols-2 lg:grid-cols-3">
+          {blogPosts.slice(0, 3).map((post) => (
+            <BlogCard key={post.slug} post={post} compact />
+          ))}
+        </div>
+
+        <div className="mt-4 flex justify-center">
+          <motion.a
+            href="/blogs"
+            className="interactive inline-flex items-center gap-2 rounded-full border border-pink-400/30 bg-pink-500/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-pink-500/20"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+          >
+            View all blogs <ArrowRight className="size-4" />
+          </motion.a>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+export function BlogPage({ disableClientSeo = false }) {
+  const seo = disableClientSeo ? null : getBlogsSeo();
+
+  return (
+    <main className="mx-auto w-full max-w-6xl px-6 pb-24 pt-36">
+      {!disableClientSeo && seo && <SeoHead {...seo} />}
+      <section className="mx-auto max-w-3xl text-center">
+        <p className="text-sm font-medium uppercase tracking-[0.24em] text-pink-300/80">Journal</p>
+        <h1 className="mt-4 text-4xl font-extrabold tracking-tight md:text-6xl">
+          Venom Hunt Blog
+        </h1>
+        <p className="mt-5 text-base leading-8 text-white/70 md:text-lg">
+          Articles on logo design, branding, illustration, and creative direction for growing
+          brands.
+        </p>
+      </section>
+
+      <section className="mt-12 grid gap-2 px-2 md:grid-cols-2 lg:grid-cols-3">
+        {blogPosts.map((post) => (
+          <BlogCard key={post.slug} post={post} compact />
+        ))}
+      </section>
+    </main>
+  );
+}
+
+export function BlogPostPage({ slug, disableClientSeo = false }) {
+  const post = blogPosts.find((item) => item.slug === slug);
+  const seo = disableClientSeo ? null : getBlogPostSeo(slug);
+  const contentBlocks = post ? buildBlogContentBlocks(post.body) : [];
+  const relatedPosts = post
+    ? blogPosts
+        .filter((item) => item.slug !== post.slug)
+        .sort((left, right) => {
+          const leftScore = Number(left.category === post.category);
+          const rightScore = Number(right.category === post.category);
+          if (leftScore !== rightScore) return rightScore - leftScore;
+          return right.createdAt.localeCompare(left.createdAt);
+        })
+        .slice(0, 3)
+    : [];
+
+  if (!post) {
+    return (
+      <main className="mx-auto flex min-h-screen w-full max-w-3xl flex-col items-center justify-center px-6 pb-20 pt-36 text-center">
+        {!disableClientSeo && seo && <SeoHead {...seo} />}
+        <h1 className="text-4xl font-extrabold tracking-tight">Blog not found</h1>
+        <p className="mt-4 max-w-xl text-white/70">
+          This article does not exist yet. Use the main blog page to review the Jaipur-focused posts
+          that are already prepared for SEO.
+        </p>
+        <a
+          href="/blogs"
+          className="interactive mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 px-5 py-3 text-sm font-semibold text-white"
+        >
+          Back to all blogs <ArrowRight className="size-4" />
+        </a>
+      </main>
+    );
+  }
+
+  return (
+    <main className="mx-auto w-full max-w-5xl px-6 pb-20 pt-32">
+      {!disableClientSeo && seo && <SeoHead {...seo} />}
+      <article className="mx-auto max-w-3xl">
+        <p className="text-sm font-medium uppercase tracking-[0.24em] text-pink-300/80">{post.category}</p>
+        <h1 className="mt-4 text-4xl font-extrabold tracking-tight md:text-6xl">{post.title}</h1>
+        <p className="mt-4 text-sm text-white/55">
+          {post.author} · {formatBlogDate(post.createdAt)} · {getReadTimeLabel(post)}
+        </p>
+        <p className="mt-6 text-lg leading-8 text-white/75">{post.description}</p>
+
+        <div className="mt-10 overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03]">
+          <img src={post.image} alt={post.title} className="aspect-[16/9] w-full object-cover" />
+        </div>
+
+        <div className="mt-10 space-y-6">
+          {contentBlocks.map((block, index) => {
+            if (block.type === "heading") {
+              return (
+                <h2 key={`${post.slug}-heading-${index}`} className="pt-4 text-2xl font-semibold text-white">
+                  {block.content}
+                </h2>
+              );
+            }
+
+            if (block.type === "list") {
+              return (
+                <ul
+                  key={`${post.slug}-list-${index}`}
+                  className="space-y-3 rounded-3xl border border-white/10 bg-white/[0.03] p-6 text-white/75"
+                >
+                  {block.items.map((item) => (
+                    <li key={item} className="flex gap-3 leading-7">
+                      <span className="mt-2 h-2 w-2 rounded-full bg-pink-400" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              );
+            }
+
+            return (
+              <p key={`${post.slug}-paragraph-${index}`} className="text-[17px] leading-8 text-white/75">
+                {block.content}
+              </p>
+            );
+          })}
+        </div>
+
+        <section className="mt-14 rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 md:p-8">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="text-xs uppercase tracking-[0.18em] text-white/45">More posts</p>
+              <h2 className="mt-2 text-2xl font-semibold text-white">More from Venom Hunt</h2>
+            </div>
+            <a href="/blogs" className="text-sm font-medium text-pink-300">
+              View all blogs
+            </a>
+          </div>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {relatedPosts.map((relatedPost) => (
+              <a
+                key={relatedPost.slug}
+                href={`/blogs/${relatedPost.slug}`}
+                className="interactive rounded-3xl border border-white/10 bg-black/20 p-5 transition hover:-translate-y-1 hover:border-white/20"
+              >
+                <p className="text-xs uppercase tracking-[0.18em] text-white/45">{relatedPost.category}</p>
+                <h3 className="mt-3 text-lg font-semibold text-white">{relatedPost.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-white/65">{relatedPost.description}</p>
+              </a>
+            ))}
+          </div>
+        </section>
+      </article>
+    </main>
+  );
+}
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -1503,7 +1754,7 @@ function Contact() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          Sorry, there was an error sending your message. Please try again or contact me directly at hello@logocraft.com.
+          Sorry, there was an error sending your message. Please try again or contact me directly at venomhunt123@gmail.com.
         </motion.div>
       )}
       
@@ -1621,7 +1872,40 @@ function Contact() {
     </Section>
   );
 }
-function Footer() {
+
+export function HomePage({ disableClientSeo = false }) {
+  const seo = disableClientSeo ? null : getHomeSeo();
+
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+    const hash = window.location.hash.replace(/^#/, "");
+    if (!hash) return undefined;
+
+    const timeoutId = window.setTimeout(() => {
+      document.getElementById(hash)?.scrollIntoView({ behavior: "auto", block: "start" });
+    }, 200);
+
+    return () => window.clearTimeout(timeoutId);
+  }, []);
+
+  return (
+    <>
+      {!disableClientSeo && seo && <SeoHead {...seo} />}
+      <main>
+        <Hero />
+        <Services />
+        <About />
+        <Portfolio />
+        <Testimonials />
+        <FAQ />
+        <BlogPreviewSection />
+        <Contact />
+      </main>
+    </>
+  );
+}
+
+export function Footer({ isHomePage }) {
   return (
     <motion.footer 
       className="relative mt-20 border-t border-white/10 py-10"
@@ -1631,19 +1915,13 @@ function Footer() {
       transition={{ duration: 0.6 }}
     >
       <div className="mx-auto w-full max-w-6xl px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-                  <motion.a 
-            href="#home" 
-            className="flex items-center gap-2 font-semibold tracking-tight interactive"
-            whileHover={{ scale: 1.05 }}
-          >
-            {/* <motion.span 
-              className="inline-block h-7 w-7 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            /> */}
-            {/* <span>Venom<span className="text-pink-400">Hunt</span></span> */}
-            <img src={`${process.env.PUBLIC_URL}/vh-02.png`} alt="Logo" className="h-8 w-32"/>  
-          </motion.a>
+        <motion.a 
+          href={isHomePage ? "#home" : "/"} 
+          className="flex items-center gap-2 font-semibold tracking-tight interactive"
+          whileHover={{ scale: 1.05 }}
+        >
+          <img src={rootAsset("vh-02.png")} alt="Logo" className="h-8 w-32"/>  
+        </motion.a>
         <div className="text-white/70">© {new Date().getFullYear()} VenomHunt. All rights reserved.</div>
         <div className="flex items-center gap-5 text-sm">
           <motion.a 
@@ -1670,13 +1948,6 @@ function Footer() {
           >
             <FaPinterest className="size-5" />
           </motion.a>
-          {/* <motion.a 
-            href="#" 
-            className="text-white/70 hover:text-white interactive"
-            whileHover={{ y: -2 }}
-          >
-            <Dribbble className="size-5" />
-          </motion.a> */}
         </div>
       </div>
     </motion.footer>
@@ -1684,7 +1955,7 @@ function Footer() {
 }
 
 
-const FloatingButton = () => {
+export const FloatingButton = () => {
   const [showButton, setShowButton] = useState(false);
   
   useEffect(() => {
@@ -1717,7 +1988,7 @@ const FloatingButton = () => {
   );
 }
 
-export default function App() {
+export function SiteFrame({ children, isHomePage }) {
   return (
     <div className="min-h-screen scroll-smooth bg-gradient-to-br from-[#0A0A14] to-[#1A1A2E] text-white" style={{ fontFamily: "Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" }}>
       <ParticlesBackground />
@@ -1762,18 +2033,26 @@ export default function App() {
         />
       </div>
       <FloatingButton />
-      <Header />
-      <main>
-        <Hero />
-        <Services />
-        <About />
-        <Portfolio />
-        <Testimonials />
-        <FAQ />
-        {/* <Insights /> */}
-        <Contact />
-      </main>
-      <Footer />
+      <Header isHomePage={isHomePage} />
+      {children}
+      <Footer isHomePage={isHomePage} />
     </div>
+  );
+}
+
+export default function App() {
+  const isBrowser = typeof window !== "undefined";
+  const pathName = normalizePathname(isBrowser ? window.location.pathname : "/");
+  const isHomePage = pathName === "/";
+  const isBlogPage = pathName === "/blogs";
+  const isBlogPostPage = pathName.startsWith("/blogs/");
+  const blogSlug = isBlogPostPage ? decodeURIComponent(pathName.replace("/blogs/", "")) : "";
+
+  return (
+    <SiteFrame isHomePage={isHomePage}>
+      {isBlogPage && <BlogPage />}
+      {isBlogPostPage && <BlogPostPage slug={blogSlug} />}
+      {!isBlogPage && !isBlogPostPage && <HomePage />}
+    </SiteFrame>
   );
 }
