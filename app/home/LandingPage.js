@@ -84,9 +84,7 @@ export default function LandingPage() {
       <section id="home" className={styles.hero}>
         <div className={styles.heroCopy}>
           <p className={styles.eyebrow}>Graphic Designer</p>
-          <h1 className={styles.heroTitle}>
-            Crafting memorable brand identities through strategic logo design.
-          </h1>
+          <h1 className={styles.heroTitle}>Creating brands people actually remember.</h1>
           <p className={styles.heroLead}>{heroTexts.join(" • ")}</p>
           <p className={styles.heroBody}>
             I create distinctive logos that tell your brand&apos;s story, connect with your
