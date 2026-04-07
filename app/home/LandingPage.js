@@ -51,19 +51,31 @@ export default function LandingPage() {
     <main className={`${styles.page} ${calSans.variable} ${inter.variable}`}>
       <header className={styles.navShell}>
         <div className={styles.nav}>
-          <a href="#home" className={styles.brandText}>
+          <a
+            href="#home"
+            className={styles.brandText}
+            data-ga-event="nav_click"
+            data-ga-label="brand_home"
+            data-ga-location="header"
+          >
             <img src="/see11.png" alt="" className={styles.brandIcon} />
             Venom Hunt
           </a>
           <nav className={styles.navLinks} aria-label="Main navigation">
-            <a href="#services">Services</a>
-            <a href="#about">About</a>
-            <a href="#portfolio">Portfolio</a>
-            <a href="#testimonials">Testimonials</a>
-            <a href="#blogs">Blogs</a>
-            <a href="#contact">Contact</a>
+            <a href="#services" data-ga-event="nav_click" data-ga-label="services" data-ga-location="header">Services</a>
+            <a href="#about" data-ga-event="nav_click" data-ga-label="about" data-ga-location="header">About</a>
+            <a href="#portfolio" data-ga-event="nav_click" data-ga-label="portfolio" data-ga-location="header">Portfolio</a>
+            <a href="#testimonials" data-ga-event="nav_click" data-ga-label="testimonials" data-ga-location="header">Testimonials</a>
+            <a href="#blogs" data-ga-event="nav_click" data-ga-label="blogs" data-ga-location="header">Blogs</a>
+            <a href="#contact" data-ga-event="nav_click" data-ga-label="contact" data-ga-location="header">Contact</a>
           </nav>
-          <a href="#contact" className={styles.primaryButton}>
+          <a
+            href="#contact"
+            className={styles.primaryButton}
+            data-ga-event="start_project_click"
+            data-ga-label="header_start_project"
+            data-ga-location="header"
+          >
             Start a Project
           </a>
         </div>
@@ -81,10 +93,22 @@ export default function LandingPage() {
             audience, and stand the test of time.
           </p>
           <div className={styles.heroActions}>
-            <a href="#portfolio" className={styles.primaryButton}>
+            <a
+              href="#portfolio"
+              className={styles.primaryButton}
+              data-ga-event="view_portfolio_click"
+              data-ga-label="hero_view_portfolio"
+              data-ga-location="hero"
+            >
               View Portfolio
             </a>
-            <a href="#contact" className={styles.secondaryButton}>
+            <a
+              href="#contact"
+              className={styles.secondaryButton}
+              data-ga-event="start_project_click"
+              data-ga-label="hero_start_project"
+              data-ga-location="hero"
+            >
               Start a Project
             </a>
           </div>
@@ -150,15 +174,32 @@ export default function LandingPage() {
               unforgettable, all under one roof.
             </p>
             <div className={styles.contactList}>
-              <a href="mailto:venomhunt123@gmail.com">
+              <a
+                href="mailto:venomhunt123@gmail.com"
+                data-ga-event="email_click"
+                data-ga-label="about_email"
+                data-ga-location="about"
+              >
                 <Mail size={16} />
                 venomhunt123@gmail.com
               </a>
-              <a href="tel:+919950531145">
+              <a
+                href="tel:+919950531145"
+                data-ga-event="phone_click"
+                data-ga-label="about_phone"
+                data-ga-location="about"
+              >
                 <Phone size={16} />
                 +91 9950531145
               </a>
-              <a href="https://www.fiverr.com/venom_hunt" target="_blank" rel="noreferrer">
+              <a
+                href="https://www.fiverr.com/venom_hunt"
+                target="_blank"
+                rel="noreferrer"
+                data-ga-event="fiverr_click"
+                data-ga-label="about_fiverr"
+                data-ga-location="about"
+              >
                 <ArrowUpRight size={16} />
                 Start working on Fiverr
               </a>
@@ -239,7 +280,14 @@ export default function LandingPage() {
         />
         <div className={styles.blogGrid}>
           {featuredBlogPosts.map((post) => (
-            <Link key={post.slug} href={`/blogs/${post.slug}`} className={styles.blogCard}>
+            <Link
+              key={post.slug}
+              href={`/blogs/${post.slug}`}
+              className={styles.blogCard}
+              data-ga-event="blog_card_click"
+              data-ga-label={post.slug}
+              data-ga-location="home_blogs"
+            >
               <div className={styles.blogMedia}>
                 <img src={post.image} alt={post.title} />
               </div>
@@ -259,7 +307,13 @@ export default function LandingPage() {
           ))}
         </div>
         <div className={styles.blogActions}>
-          <Link href="/blogs" className={styles.secondaryButton}>
+          <Link
+            href="/blogs"
+            className={styles.secondaryButton}
+            data-ga-event="view_all_blogs_click"
+            data-ga-label="home_view_all_blogs"
+            data-ga-location="home_blogs"
+          >
             View all blogs
           </Link>
         </div>
@@ -274,15 +328,32 @@ export default function LandingPage() {
               copy="Let's discuss your logo design needs. I'll get back to you within 24 hours."
             />
             <div className={styles.contactList}>
-              <a href="mailto:venomhunt123@gmail.com">
+              <a
+                href="mailto:venomhunt123@gmail.com"
+                data-ga-event="email_click"
+                data-ga-label="contact_email"
+                data-ga-location="contact"
+              >
                 <Mail size={16} />
                 venomhunt123@gmail.com
               </a>
-              <a href="tel:+919950531145">
+              <a
+                href="tel:+919950531145"
+                data-ga-event="phone_click"
+                data-ga-label="contact_phone"
+                data-ga-location="contact"
+              >
                 <Phone size={16} />
                 +91 9950531145
               </a>
-              <a href="https://www.fiverr.com/venom_hunt" target="_blank" rel="noreferrer">
+              <a
+                href="https://www.fiverr.com/venom_hunt"
+                target="_blank"
+                rel="noreferrer"
+                data-ga-event="fiverr_click"
+                data-ga-label="contact_fiverr"
+                data-ga-location="contact"
+              >
                 <ArrowUpRight size={16} />
                 Start working on Fiverr
               </a>
@@ -317,7 +388,13 @@ export default function LandingPage() {
               </select>
             </div>
             <textarea rows="6" name="message" placeholder="Tell me about your project and brand" />
-            <button type="button" className={styles.primaryButton}>
+            <button
+              type="button"
+              className={styles.primaryButton}
+              data-ga-event="send_message_click"
+              data-ga-label="contact_form_send"
+              data-ga-location="contact"
+            >
               Send Message
             </button>
           </form>
@@ -326,14 +403,28 @@ export default function LandingPage() {
 
       <footer className={styles.footer}>
         <div className={styles.footerInner}>
-          <a href="#home" className={styles.brandText}>
+          <a
+            href="#home"
+            className={styles.brandText}
+            data-ga-event="nav_click"
+            data-ga-label="footer_home"
+            data-ga-location="footer"
+          >
             <img src="/see11.png" alt="" className={styles.brandIcon} />
             Venom Hunt
           </a>
           <p>© {new Date().getFullYear()} Venom Hunt. All rights reserved.</p>
           <div className={styles.footerLinks}>
-            {socialLinks.map((item) => (
-              <a key={item.label} href={item.href} target="_blank" rel="noreferrer">
+              {socialLinks.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                target="_blank"
+                rel="noreferrer"
+                data-ga-event="social_click"
+                data-ga-label={item.label.toLowerCase()}
+                data-ga-location="footer"
+              >
                 {item.label}
               </a>
             ))}

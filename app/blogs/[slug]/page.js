@@ -66,19 +66,31 @@ export default async function Page({ params }) {
       <main className={`${styles.page} ${calSans.variable} ${inter.variable}`}>
         <header className={styles.navShell}>
           <div className={styles.nav}>
-            <Link href="/" className={styles.brandText}>
+            <Link
+              href="/"
+              className={styles.brandText}
+              data-ga-event="nav_click"
+              data-ga-label="brand_home"
+              data-ga-location="blog_article_header"
+            >
               <img src="/see11.png" alt="" className={styles.brandIcon} />
               Venom Hunt
             </Link>
             <nav className={styles.navLinks} aria-label="Blog article navigation">
-              <a href="/#services">Services</a>
-              <a href="/#about">About</a>
-              <Link href="/blogs">All Blogs</Link>
-              <a href="/#portfolio">Portfolio</a>
-              <a href="/#testimonials">Testimonials</a>
-              <a href="/#contact">Contact</a>
+              <a href="/#services" data-ga-event="nav_click" data-ga-label="services" data-ga-location="blog_article_header">Services</a>
+              <a href="/#about" data-ga-event="nav_click" data-ga-label="about" data-ga-location="blog_article_header">About</a>
+              <Link href="/blogs" data-ga-event="view_all_blogs_click" data-ga-label="article_nav_all_blogs" data-ga-location="blog_article_header">All Blogs</Link>
+              <a href="/#portfolio" data-ga-event="nav_click" data-ga-label="portfolio" data-ga-location="blog_article_header">Portfolio</a>
+              <a href="/#testimonials" data-ga-event="nav_click" data-ga-label="testimonials" data-ga-location="blog_article_header">Testimonials</a>
+              <a href="/#contact" data-ga-event="nav_click" data-ga-label="contact" data-ga-location="blog_article_header">Contact</a>
             </nav>
-            <a href="/#contact" className={styles.primaryButton}>
+            <a
+              href="/#contact"
+              className={styles.primaryButton}
+              data-ga-event="start_project_click"
+              data-ga-label="article_header_start_project"
+              data-ga-location="blog_article_header"
+            >
               Start a Project
             </a>
           </div>
@@ -127,13 +139,26 @@ export default async function Page({ params }) {
                 <p className={styles.eyebrow}>More posts</p>
                 <h2>More from Venom Hunt</h2>
               </div>
-              <Link href="/blogs" className={styles.secondaryButton}>
+              <Link
+                href="/blogs"
+                className={styles.secondaryButton}
+                data-ga-event="view_all_blogs_click"
+                data-ga-label="article_related_view_all_blogs"
+                data-ga-location="blog_article_related"
+              >
                 View all blogs
               </Link>
             </div>
             <div className={styles.relatedGrid}>
               {relatedPosts.map((relatedPost) => (
-                <Link key={relatedPost.slug} href={`/blogs/${relatedPost.slug}`} className={styles.relatedCard}>
+                <Link
+                  key={relatedPost.slug}
+                  href={`/blogs/${relatedPost.slug}`}
+                  className={styles.relatedCard}
+                  data-ga-event="blog_card_click"
+                  data-ga-label={relatedPost.slug}
+                  data-ga-location="blog_article_related"
+                >
                   <p className={styles.relatedMeta}>{relatedPost.category}</p>
                   <h3>{relatedPost.title}</h3>
                   <p>{relatedPost.description}</p>
@@ -148,14 +173,28 @@ export default async function Page({ params }) {
 
         <footer className={styles.footer}>
           <div className={styles.footerInner}>
-            <Link href="/" className={styles.brandText}>
+            <Link
+              href="/"
+              className={styles.brandText}
+              data-ga-event="nav_click"
+              data-ga-label="footer_home"
+              data-ga-location="blog_article_footer"
+            >
               <img src="/see11.png" alt="" className={styles.brandIcon} />
               Venom Hunt
             </Link>
             <p>© {new Date().getFullYear()} Venom Hunt. All rights reserved.</p>
             <div className={styles.footerLinks}>
               {socialLinks.map((item) => (
-                <a key={item.label} href={item.href} target="_blank" rel="noreferrer">
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  data-ga-event="social_click"
+                  data-ga-label={item.label.toLowerCase()}
+                  data-ga-location="blog_article_footer"
+                >
                   {item.label}
                 </a>
               ))}

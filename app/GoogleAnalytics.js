@@ -21,6 +21,33 @@ export default function GoogleAnalytics() {
     });
   }, [pathname]);
 
+  useEffect(() => {
+    function handleClick(event) {
+      if (typeof window === "undefined" || typeof window.gtag !== "function") {
+        return;
+      }
+
+      const target = event.target instanceof Element ? event.target.closest("[data-ga-event]") : null;
+      if (!target) {
+        return;
+      }
+
+      const { gaEvent, gaLabel, gaLocation } = target.dataset;
+      const href = target.getAttribute("href");
+
+      window.gtag("event", gaEvent, {
+        event_category: "engagement",
+        event_label: gaLabel || href || pathname,
+        page_path: pathname,
+        link_url: href || "",
+        section: gaLocation || "",
+      });
+    }
+
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, [pathname]);
+
   return (
     <>
       <Script
