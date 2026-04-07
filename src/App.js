@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { Menu, X, Palette, PenTool, Monitor, Sparkles, Mail, Phone, ArrowRight, ChevronDown, Instagram, Youtube } from "lucide-react";
+import { Menu, X, Palette, PenTool, Monitor, Sparkles, Mail, Phone, ArrowRight, ArrowUpRight, ChevronDown, Instagram, Youtube } from "lucide-react";
 import emailjs from 'emailjs-com';
 import { SiFiverr } from "react-icons/si";
 import { FaPinterest } from "react-icons/fa";
@@ -213,6 +213,8 @@ const heroTexts = [
   "Creative Director"
 ];
 
+const EMAILJS_PLACEHOLDERS = new Set(["your_service_id", "your_template_id", "your_user_id"]);
+
 // Sample logo data - replace with your actual logos
 const logos = [
   { id: 1, name: "Industry", image: rootAsset("Logos/Character_Mascot/mscoleedrakes_l01_4a.png"), description: "Sports" },
@@ -308,6 +310,27 @@ function getSectionHref(sectionId, isHomePage) {
 
 function rootAsset(path) {
   return path.startsWith("/") ? path : `/${path}`;
+}
+
+function hasConfiguredEmailJsCredentials(serviceID, templateID, userID) {
+  return [serviceID, templateID, userID].every(
+    (value) => value && !EMAILJS_PLACEHOLDERS.has(value)
+  );
+}
+
+function buildMailtoHref({ name, email, service, budget, message }) {
+  const subject = `Project inquiry from ${name || "Website visitor"}`;
+  const body = [
+    `Name: ${name}`,
+    `Email: ${email}`,
+    `Service: ${service}`,
+    `Budget: ${budget}`,
+    "",
+    "Project details:",
+    message,
+  ].join("\n");
+
+  return `mailto:venomhunt123@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
 // ... (useParallax, Stat, Section, Card, FAQItem components remain the same) ...
@@ -761,13 +784,13 @@ function About() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <Card>
+          <Card className="h-full flex flex-col">
             <h3 className="text-xl font-semibold">My Approach</h3>
             <p className="mt-3 text-white/70">
               {/* I follow a strategic process that begins with understanding your business, audience, and goals. Through research, sketching, and refinement, I create logos that are not just visually appealing but also meaningful and effective. */}
             Venom Hunt is your one-stop creative hub with 3 powerhouse services: bold logo & brand identity design, eye-catching illustrations & mascots, and high-impact marketing visuals from flyers to packaging. Everything you need to make your brand unforgettable, all under one roof.
             </p>
-            <div className="mt-6 flex flex-col gap-4">
+            <div className="mt-auto pt-6 flex flex-col gap-4">
               <motion.a 
                 href="mailto:venomhunt123@gmail.com" 
                 className="inline-flex items-center gap-2 interactive"
@@ -781,6 +804,15 @@ function About() {
                 whileHover={{ x: 5 }}
               >
                 <Phone className="size-4" /> +91 9950531145
+              </motion.a>
+              <motion.a
+                href="https://www.fiverr.com/venom_hunt"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 interactive"
+                whileHover={{ x: 5 }}
+              >
+                <ArrowUpRight className="size-4" /> Start working on Fiverr
               </motion.a>
             </div>
           </Card>
@@ -1681,12 +1713,24 @@ function Contact() {
     setSubmitStatus(null);
     
     try {
-      // Replace these with your actual EmailJS credentials
       const serviceID = process.env.REACT_APP_EMAILJS_SERVICE_ID || 'your_service_id';
       const templateID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || 'your_template_id';
       const userID = process.env.REACT_APP_EMAILJS_USER_ID || 'your_user_id';
-      
-      // Send email using EmailJS
+
+      if (!hasConfiguredEmailJsCredentials(serviceID, templateID, userID)) {
+        window.location.href = buildMailtoHref(formData);
+        setSubmitStatus('fallback');
+        setFormData({
+          name: "",
+          email: "",
+          service: "",
+          budget: "",
+          message: ""
+        });
+        setTimeout(() => setSubmitStatus(null), 5000);
+        return;
+      }
+
       const result = await emailjs.sendForm(serviceID, templateID, e.target, userID);
       
       console.log('Email sent successfully:', result.text);
@@ -1705,9 +1749,8 @@ function Contact() {
       setTimeout(() => setSubmitStatus(null), 5000);
     } catch (error) {
       console.error('Email sending failed:', error);
-      setSubmitStatus('error');
-      
-      // Reset status after 5 seconds
+      window.location.href = buildMailtoHref(formData);
+      setSubmitStatus('fallback');
       setTimeout(() => setSubmitStatus(null), 5000);
     } finally {
       setIsSubmitting(false);
@@ -1745,6 +1788,16 @@ function Contact() {
           animate={{ opacity: 1, y: 0 }}
         >
           Thank you! Your message has been sent successfully. I'll get back to you soon.
+        </motion.div>
+      )}
+
+      {submitStatus === 'fallback' && (
+        <motion.div 
+          className="mx-auto mt-6 max-w-2xl p-4 bg-blue-900/30 border border-blue-500/30 rounded-xl text-blue-300"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          Your email app was opened with a prefilled draft because EmailJS is not configured yet.
         </motion.div>
       )}
       
@@ -1868,6 +1921,15 @@ function Contact() {
             <Phone className="size-4"/> +91 9950531145
           </motion.a>
         </div>
+        <motion.a
+          href="https://www.fiverr.com/venom_hunt"
+          target="_blank"
+          rel="noreferrer"
+          className="mt-4 inline-flex items-center gap-2 interactive"
+          whileHover={{ y: -2 }}
+        >
+          <ArrowUpRight className="size-4" /> Start working on Fiverr
+        </motion.a>
       </motion.div>
     </Section>
   );
@@ -2032,7 +2094,6 @@ export function SiteFrame({ children, isHomePage }) {
           }}
         />
       </div>
-      <FloatingButton />
       <Header isHomePage={isHomePage} />
       {children}
       <Footer isHomePage={isHomePage} />

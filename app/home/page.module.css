@@ -1,0 +1,736 @@
+.page {
+  --white: #ffffff;
+  --surface: #ffffff;
+  --surface-muted: #f7f7f7;
+  --surface-soft: #fbfbfb;
+  --text: #242424;
+  --text-strong: #111111;
+  --text-muted: #7d7d7d;
+  --ring: rgba(34, 42, 53, 0.08);
+  --soft: rgba(34, 42, 53, 0.05);
+  --contact: rgba(19, 19, 22, 0.7);
+  --font-sans: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display-stack: var(--font-display), var(--font-body), sans-serif;
+  min-height: 100vh;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top right, rgba(17, 17, 17, 0.05) 0, transparent 24%),
+    radial-gradient(circle at top left, rgba(17, 17, 17, 0.025) 0, transparent 28%),
+    var(--white);
+  font-family: var(--font-sans);
+}
+
+.page *,
+.page *::before,
+.page *::after {
+  box-sizing: border-box;
+}
+
+.page a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.navShell {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  padding: 18px 24px 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(16px);
+}
+
+.nav,
+.heroPanel,
+.card,
+.testimonialCard,
+.faqCard,
+.contactShell,
+.blogCard,
+.portfolioGroup {
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow:
+    var(--contact) 0 1px 5px -4px,
+    var(--ring) 0 0 0 1px,
+    var(--soft) 0 14px 28px -18px;
+  backdrop-filter: blur(16px);
+}
+
+.nav {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  padding: 14px 18px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.brandText {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display-stack);
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  color: var(--text-strong);
+}
+
+.brandIcon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  transition:
+    transform 0.18s ease,
+    opacity 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.primaryButton {
+  background: var(--text);
+  color: var(--white);
+  box-shadow:
+    rgba(255, 255, 255, 0.15) 0 2px 0 inset,
+    rgba(0, 0, 0, 0.16) 0 10px 24px -18px;
+}
+
+.primaryButton,
+.primaryButton:visited,
+.primaryButton:hover,
+.primaryButton:active,
+.primaryButton * {
+  color: var(--white) !important;
+  -webkit-text-fill-color: var(--white);
+}
+
+.secondaryButton {
+  background: var(--white);
+  color: var(--text);
+  box-shadow:
+    var(--contact) 0 1px 5px -4px,
+    var(--ring) 0 0 0 1px,
+    var(--soft) 0 10px 24px -18px;
+}
+
+.primaryButton:hover,
+.secondaryButton:hover,
+.blogCard:hover {
+  transform: translateY(-1px);
+}
+
+.hero,
+.section,
+.footer {
+  width: min(1200px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.hero {
+  padding: 84px 0 64px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.98fr) minmax(360px, 1.02fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+.eyebrow,
+.cardLabel {
+  margin: 0 0 16px;
+  font-family: var(--font-display-stack);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+}
+
+.heroTitle,
+.sectionTitle,
+.cardTitle {
+  margin: 0;
+  font-family: var(--font-display-stack);
+  color: var(--text-strong);
+}
+
+.heroTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: clamp(3rem, 7vw, 5.15rem);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+.heroLead {
+  margin: 24px 0 0;
+  font-size: 24px;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.heroBody,
+.sectionCopy,
+.cardBody,
+.quote,
+.faqCard p,
+.logoMeta p,
+.blogContent p,
+.contactList a,
+.metric span,
+.statCard span,
+.testimonialHeader p,
+.footerInner p {
+  color: var(--text-muted);
+}
+
+.heroBody {
+  max-width: 54ch;
+  margin: 18px 0 0;
+  font-size: 17px;
+  line-height: 1.68;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.heroPanel {
+  border-radius: 24px;
+  padding: 18px;
+  display: grid;
+  gap: 16px;
+}
+
+.heroPanelHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.heroLogoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.heroLogoTile,
+.logoMedia,
+.blogMedia {
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--surface-muted);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.heroLogoTile {
+  aspect-ratio: 1 / 1;
+  padding: 12px;
+}
+
+.heroLogoTile img,
+.logoMedia img,
+.blogMedia img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.heroPanelNote {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+.section {
+  padding: 82px 0;
+}
+
+.sectionHeader {
+  max-width: 760px;
+  margin-bottom: 42px;
+}
+
+.sectionTitle {
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
+.sectionCopy {
+  max-width: 58ch;
+  margin: 16px 0 0;
+  font-size: 16px;
+  line-height: 1.72;
+}
+
+.serviceGrid,
+.testimonialGrid,
+.blogGrid {
+  display: grid;
+  gap: 20px;
+}
+
+.serviceGrid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.card {
+  padding: 28px;
+  border-radius: 20px;
+}
+
+.cardLabel {
+  margin-bottom: 14px;
+}
+
+.cardTitle {
+  font-size: 28px;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+}
+
+.pointList {
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.pointList li::before {
+  content: "•";
+  margin-right: 8px;
+  color: var(--text);
+}
+
+.aboutLayout,
+.contactShell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
+  gap: 20px;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.metric {
+  padding: 18px;
+  border-radius: 18px;
+  background: var(--surface-soft);
+  box-shadow: inset 0 0 0 1px var(--ring);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cardBody {
+  margin: 18px 0 0;
+  font-size: 15px;
+  line-height: 1.72;
+}
+
+.approachCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.approachCard .contactList {
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+.contactList {
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.contactList a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.portfolioSections {
+  display: grid;
+  gap: 26px;
+}
+
+.portfolioGroup {
+  border-radius: 24px;
+  padding: 22px;
+}
+
+.portfolioHeading {
+  margin-bottom: 20px;
+}
+
+.portfolioHeading h3 {
+  margin: 0;
+  font-family: var(--font-display-stack);
+  font-size: 28px;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--text-strong);
+}
+
+.logoGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.logoCard {
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--surface-soft);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.logoMedia {
+  aspect-ratio: 1 / 1;
+  padding: 14px;
+}
+
+.logoMedia img {
+  object-fit: contain;
+}
+
+.logoMeta {
+  padding: 14px 14px 16px;
+}
+
+.logoMeta h4,
+.blogContent h3,
+.testimonialHeader h3,
+.faqCard h3 {
+  margin: 0;
+  color: var(--text-strong);
+}
+
+.logoMeta h4 {
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.logoMeta p {
+  margin: 6px 0 0;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.testimonialGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.testimonialCard {
+  padding: 24px;
+  border-radius: 20px;
+}
+
+.testimonialHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  object-fit: cover;
+}
+
+.testimonialHeader h3 {
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+.testimonialHeader p {
+  margin: 4px 0 0;
+  font-size: 13px;
+}
+
+.quote {
+  margin: 18px 0 0;
+  font-size: 15px;
+  line-height: 1.72;
+}
+
+.faqList {
+  display: grid;
+  gap: 16px;
+}
+
+.faqCard {
+  padding: 24px 26px;
+  border-radius: 20px;
+}
+
+.faqCard h3 {
+  font-family: var(--font-display-stack);
+  font-size: 22px;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.faqCard p {
+  margin: 12px 0 0;
+  max-width: 72ch;
+  font-size: 15px;
+  line-height: 1.72;
+}
+
+.blogGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.blogActions {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.blogCard {
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.18s ease;
+}
+
+.blogMedia {
+  aspect-ratio: 16 / 9;
+}
+
+.blogContent {
+  padding: 20px;
+}
+
+.blogMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+}
+
+.blogContent h3 {
+  margin-top: 14px;
+  font-family: var(--font-display-stack);
+  font-size: 24px;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+.blogContent p {
+  margin: 12px 0 0;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.inlineCta {
+  margin-top: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-strong);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.contactShell {
+  border-radius: 24px;
+  padding: 30px;
+}
+
+.contactIntro .sectionHeader {
+  margin-bottom: 0;
+}
+
+.contactForm {
+  display: grid;
+  gap: 14px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.contactForm input,
+.contactForm select,
+.contactForm textarea {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: var(--surface-soft);
+  box-shadow:
+    inset 0 0 0 1px var(--ring),
+    inset 0 1px 1.9px rgba(0, 0, 0, 0.08);
+  color: var(--text);
+  font: inherit;
+  outline: none;
+}
+
+.contactForm textarea {
+  resize: vertical;
+}
+
+.contactForm input::placeholder,
+.contactForm textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.contactForm input:focus,
+.contactForm select:focus,
+.contactForm textarea:focus {
+  box-shadow:
+    inset 0 0 0 1px rgba(34, 42, 53, 0.16),
+    0 0 0 3px rgba(59, 130, 246, 0.14);
+}
+
+.footer {
+  padding: 0 0 40px;
+}
+
+.footerInner {
+  border-top: 1px solid var(--ring);
+  padding-top: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.footerInner p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.footerLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+@media (max-width: 1100px) {
+  .hero,
+  .aboutLayout,
+  .contactShell {
+    grid-template-columns: 1fr;
+  }
+
+  .serviceGrid,
+  .blogGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .logoGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .navShell {
+    padding: 14px 14px 0;
+  }
+
+  .navLinks {
+    width: 100%;
+    order: 3;
+    overflow-x: auto;
+    white-space: nowrap;
+    gap: 18px;
+  }
+
+  .hero,
+  .section,
+  .footer {
+    width: min(100% - 28px, 1200px);
+  }
+
+  .hero {
+    padding: 54px 0 44px;
+  }
+
+  .heroPanel,
+  .serviceGrid,
+  .testimonialGrid,
+  .blogGrid,
+  .heroStats,
+  .statsGrid,
+  .logoGrid,
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolioGroup,
+  .contactShell,
+  .card,
+  .testimonialCard,
+  .faqCard,
+  .blogCard,
+  .heroPanel {
+    border-radius: 18px;
+  }
+
+  .section {
+    padding: 54px 0;
+  }
+
+  .heroLead {
+    font-size: 20px;
+  }
+
+  .blogContent h3,
+  .cardTitle,
+  .portfolioHeading h3 {
+    font-size: 22px;
+  }
+
+  .contactShell {
+    padding: 24px;
+  }
+}

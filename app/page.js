@@ -1,4 +1,4 @@
-import { HomePage, SiteFrame } from "../src/App";
+import LandingPage from "./home/LandingPage";
 import StructuredData from "../src/components/StructuredData";
 import { toNextMetadata } from "../src/seo/nextMetadata";
 import { getHomeSeo } from "../src/seo/routes";
@@ -11,9 +11,7 @@ export default function Page() {
   return (
     <>
       <StructuredData entries={seo.structuredData} />
-      <SiteFrame isHomePage>
-        <HomePage disableClientSeo />
-      </SiteFrame>
+      <LandingPage />
     </>
   );
 }

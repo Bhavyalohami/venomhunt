@@ -1,5 +1,6 @@
 import "../src/index.css";
 
+import GoogleAnalytics from "./GoogleAnalytics";
 import { SITE_NAME, SITE_URL, DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE } from "../src/seo/site";
 
 export const metadata = {
@@ -11,8 +12,8 @@ export const metadata = {
   },
   description: DEFAULT_DESCRIPTION,
   icons: {
-    icon: "/favicon.ico",
-    apple: "/vh-02.png",
+    icon: "/see11.png",
+    apple: "/see11.png",
   },
   manifest: "/manifest.json",
   openGraph: {
@@ -35,7 +36,10 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <GoogleAnalytics />
+        {children}
+      </body>
     </html>
   );
 }
