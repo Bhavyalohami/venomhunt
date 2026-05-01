@@ -654,8 +654,11 @@
 
 .budgetSliderField {
   min-width: 0;
+  height: 52px;
+  display: grid;
+  align-content: center;
   border-radius: 14px;
-  padding: 14px 16px 12px;
+  padding: 8px 16px 7px;
   background: var(--surface-soft);
   box-shadow:
     inset 0 0 0 1px var(--ring),
@@ -669,6 +672,7 @@
   gap: 14px;
   color: var(--text-muted);
   font-size: 14px;
+  line-height: 16px;
 }
 
 .budgetSliderHeader strong {
@@ -679,7 +683,8 @@
 
 .budgetSlider {
   width: 100%;
-  margin: 14px 0 0;
+  height: 14px;
+  margin: 5px 0 0;
   appearance: none;
   background: transparent;
   cursor: pointer;
@@ -695,15 +700,15 @@
 }
 
 .budgetSlider::-webkit-slider-runnable-track {
-  height: 6px;
+  height: 4px;
   border-radius: 999px;
   background: linear-gradient(90deg, rgba(17, 17, 17, 0.22), rgba(17, 17, 17, 0.08));
 }
 
 .budgetSlider::-webkit-slider-thumb {
-  width: 20px;
-  height: 20px;
-  margin-top: -7px;
+  width: 16px;
+  height: 16px;
+  margin-top: -6px;
   appearance: none;
   border: 3px solid var(--white);
   border-radius: 999px;
@@ -714,14 +719,14 @@
 }
 
 .budgetSlider::-moz-range-track {
-  height: 6px;
+  height: 4px;
   border-radius: 999px;
   background: linear-gradient(90deg, rgba(17, 17, 17, 0.22), rgba(17, 17, 17, 0.08));
 }
 
 .budgetSlider::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
+  width: 10px;
+  height: 10px;
   border: 3px solid var(--white);
   border-radius: 999px;
   background: var(--text);
@@ -731,14 +736,7 @@
 }
 
 .budgetStops {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 6px;
-  margin-top: 9px;
-  color: var(--text-muted);
-  font-size: 11px;
-  line-height: 1.25;
-  text-align: center;
+  display: none;
 }
 
 .budgetStops span:first-child {
