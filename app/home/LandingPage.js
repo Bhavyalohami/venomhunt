@@ -67,6 +67,8 @@ export default function LandingPage() {
             <a href="#portfolio" data-ga-event="nav_click" data-ga-label="portfolio" data-ga-location="header">Portfolio</a>
             <a href="#testimonials" data-ga-event="nav_click" data-ga-label="testimonials" data-ga-location="header">Testimonials</a>
             <a href="#blogs" data-ga-event="nav_click" data-ga-label="blogs" data-ga-location="header">Blogs</a>
+            <Link href="/original" data-ga-event="nav_click" data-ga-label="original_design" data-ga-location="header">Original</Link>
+            <Link href="/apple" data-ga-event="nav_click" data-ga-label="apple_design" data-ga-location="header">Apple</Link>
             <a href="#contact" data-ga-event="nav_click" data-ga-label="contact" data-ga-location="header">Contact</a>
           </nav>
           <a
