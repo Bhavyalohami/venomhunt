@@ -156,7 +156,7 @@ export const contactServices = [
   "Logo Animation",
 ];
 
-export const budgetOptions = ["$500-$1000", "$1000-$2500", "$2500-$5000", "$5000+"];
+export const budgetOptions = ["$5", "$50", "$500", "$1000", "$5000+"];
 
 export const socialLinks = [
   { label: "Fiverr", href: "https://www.fiverr.com/venom_hunt" },
