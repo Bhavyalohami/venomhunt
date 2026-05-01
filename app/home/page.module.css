@@ -628,6 +628,25 @@
     0 0 0 3px rgba(59, 130, 246, 0.14);
 }
 
+.contactForm button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.formStatus {
+  margin: -2px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.formStatusSuccess {
+  color: #116d3b;
+}
+
+.formStatusError {
+  color: #a32929;
+}
+
 .footer {
   padding: 0 0 40px;
 }

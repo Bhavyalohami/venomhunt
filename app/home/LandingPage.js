@@ -2,10 +2,9 @@ import Link from "next/link";
 import { Cal_Sans, Inter } from "next/font/google";
 import { ArrowRight, ArrowUpRight, Mail, Phone } from "lucide-react";
 import { blogPosts, formatBlogDate, getReadTimeLabel } from "../../src/lib/blogs";
+import ContactForm from "./ContactForm";
 import {
   aboutStats,
-  budgetOptions,
-  contactServices,
   faqs,
   heroTexts,
   portfolioSections,
@@ -358,44 +357,7 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <form className={styles.contactForm}>
-            <div className={styles.formGrid}>
-              <input name="name" placeholder="Name" />
-              <input type="email" name="email" placeholder="Email" />
-            </div>
-            <div className={styles.formGrid}>
-              <select name="service" defaultValue="">
-                <option value="" disabled>
-                  Choose Service
-                </option>
-                {contactServices.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
-              <select name="budget" defaultValue="">
-                <option value="" disabled>
-                  Budget Range
-                </option>
-                {budgetOptions.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <textarea rows="6" name="message" placeholder="Tell me about your project and brand" />
-            <button
-              type="button"
-              className={styles.primaryButton}
-              data-ga-event="send_message_click"
-              data-ga-label="contact_form_send"
-              data-ga-location="contact"
-            >
-              Send Message
-            </button>
-          </form>
+          <ContactForm />
         </div>
       </section>
 
